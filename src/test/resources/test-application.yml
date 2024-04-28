@@ -1,0 +1,4 @@
+spring:
+  main.banner-mode: off
+
+url: http://localhost:${local.server.port}/api

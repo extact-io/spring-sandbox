@@ -1,0 +1,26 @@
+config.val: Hello
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans"
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+      #group:
+      #  readiness:
+      #    include: "readinessState,db"
+
+spring:
+  config:
+    import:
+    #- optional:classpath:datasource.yml
+    - optional:classpath:datasource-multi.yml
+
+sandbox:
+  service:
+    hello: jpa

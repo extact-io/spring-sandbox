@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    test1:
+      url: jdbc:h2:mem:test1
+      driverClassName: org.h2.Driver
+      username: sa
+      password:
+      hikari:
+        maximum-pool-size: 30
+      jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        defer-datasource-initialization: true
+        hibernate:
+          ddl-auto: create
+    test2:
+      url: jdbc:h2:mem:test2
+      driverClassName: org.h2.Driver
+      username: sa
+      password:
+      hikari:
+        maximum-pool-size: 10
+      jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        defer-datasource-initialization: true
+        hibernate:
+          ddl-auto: create
