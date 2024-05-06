@@ -1,5 +1,9 @@
 config.val: Hello
 
+logging.level:
+  org.springframework: INFO
+  sample: DEBUG
+
 management:
   endpoints:
     web:
@@ -11,16 +15,28 @@ management:
       show-details: always
       probes:
         enabled: true
-      #group:
-      #  readiness:
-      #    include: "readinessState,db"
+      group:
+        readiness:
+          include: "readinessState,db,dependentServers"
 
 spring:
   config:
     import:
     #- optional:classpath:datasource.yml
     - optional:classpath:datasource-multi.yml
+  threads:
+    virtual:
+      enabled: false
+
 
 sandbox:
   service:
-    hello: jpa
+    hello: config
+  health:
+    names:
+    - simple1
+    - simple2
+    depends:
+    - https://www.yahoo.co.jp
+    - https://www.mamezou.com
+

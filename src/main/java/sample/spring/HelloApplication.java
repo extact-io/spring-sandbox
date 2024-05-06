@@ -16,6 +16,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -24,11 +25,13 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import com.zaxxer.hikari.HikariDataSource;
 
 import ch.qos.logback.access.tomcat.LogbackValve;
+import sample.spring.health.SimpleCompositeHealthConfiguration;
 
 @SpringBootApplication
 @EnableJpaRepositories(
@@ -36,6 +39,8 @@ import ch.qos.logback.access.tomcat.LogbackValve;
         entityManagerFactoryRef = "test1EntityManagerFactory",
         transactionManagerRef = "test1TransactionManager"
     )
+@EnableAsync
+@Import(SimpleCompositeHealthConfiguration.class)
 public class HelloApplication {
 
     public static void main(String[] args) {
@@ -153,4 +158,6 @@ public class HelloApplication {
             @Qualifier("test2EntityManagerFactory") LocalContainerEntityManagerFactoryBean entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory.getObject());
     }
+
+
 }
