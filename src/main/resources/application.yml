@@ -9,7 +9,7 @@ management:
     web:
       exposure:
         include: "*"
-        exclude: "env,beans"
+        #exclude: "env,beans"
   endpoint:
     health:
       show-details: always
@@ -18,8 +18,22 @@ management:
       group:
         readiness:
           include: "readinessState,db,dependentServers"
+  info:
+    java:
+      enabled: false
+    os:
+      enabled: false
+    env:
+      enabled: false
+    build:
+      enabled: true
+    git:
+      enabled: true
 
 spring:
+  info:
+    git:
+      location: classpath:META-INF/git.properties # デフォルトの位置変更
   config:
     import:
     #- optional:classpath:datasource.yml
